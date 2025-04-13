@@ -41,14 +41,17 @@ def menu():
         
         if option == 1:
             print()
-            name = input("Nombre de la imagen: ")
-            image_controller.add_image(name, "ruta/a/la/imagen") 
-            print(Colors.GREEN + f"Imagen '{name}' registrada correctamente!" + Colors.RESET)
+            name = input("Nombre de la imagen: ").strip()
+            route = image_controller.add_image(name)
+            if route:
+                print(Colors.GREEN + f"Imagen: '{name}' registrada correctamente!\nRuta: {route}" + Colors.RESET)
+            else:
+                print(Colors.RED + "No se pudo registrar la imagen" + Colors.RESET)
             sleep(1)
-            input("\nPresione Enter para continuar...")
+            input("\nPresione Enter para volver al menú principal...")
         elif option == 2:
             print()
-            id_image = int(input("Ingrese el Identificador de la imagen a modificar: "))
+            id_image = int(input("Ingrese el 'ID' de la imagen a modificar: "))
             name = input("Nuevo nombre de la imagen: ")
             
             if image_controller.modify_image(id_image, name):
@@ -56,23 +59,22 @@ def menu():
             else:
                 print(Colors.RED + "Error: Imagen no encontrada." + Colors.RESET)
             sleep(1)
-            input("\nPresione Enter para continuar...")
+            input("\nPresione Enter para volver al menú principal...")
         elif option == 3:
             print()
-            id_imagen = int(input("Ingrese el Identificador de la imagen a eliminar: "))
+            id_imagen = int(input("Ingrese el 'ID' de la imagen a eliminar: "))
 
             if image_controller.delete_image(id_imagen):
                 print(Colors.GREEN + f"Imagen con ID '{id_imagen}' eliminada correctamente!" + Colors.RESET)
             else:
                 print(Colors.RED + "Error: Imagen no encontrada." + Colors.RESET)
             sleep(1)
-            input("\nPresione Enter para continuar...")
+            input("\nPresione Enter para volver al menú principal...")
         elif option == 4:
             print("Lista de imágenes:")
             image_controller.list_images()
             sleep(1)
-            input("\nPresione Enter para continuar...")
-            # Agregar lógica para listar imágenes almacenadas
+            input("\nPresione Enter para volver al menú principal...")
         elif option == 0:
             print(Colors.YELLOW + "\nSaliendo del sistema..." + Colors.RESET)
             sleep(1)
