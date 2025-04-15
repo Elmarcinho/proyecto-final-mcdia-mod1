@@ -1,26 +1,10 @@
 import os
 from time import sleep
-from utils.menu import Colors
-from controllers.controller_image import ImageController
+from utils import Colors, clear_screen, get_option
+from controllers import ImageController
 
 
 image_controller = ImageController()
-
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-def get_option():
-    while True:
-        try:
-            option = int(input(Colors.WHITE + "Seleccione una opción: " + Colors.RESET))
-            if 0 <= option <= 5:
-                return option
-            else:
-                print(Colors.RED + "Opción no válida. Intente de nuevo." + Colors.RESET)
-        except ValueError:
-            print(Colors.RED + "Entrada inválida. Debe ser un número." + Colors.RESET)
-
 
 def menu():
     while True:

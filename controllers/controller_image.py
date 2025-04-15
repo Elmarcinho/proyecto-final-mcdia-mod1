@@ -1,6 +1,6 @@
 import os
 import shutil
-from models.model_image import ImageModel
+from models import ImageModel
 
 
 class ImageController:
