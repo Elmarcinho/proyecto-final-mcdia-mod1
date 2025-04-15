@@ -44,7 +44,7 @@ def menu():
             name = input("Nombre de la imagen: ").strip()
             route = image_controller.add_image(name)
             if route:
-                print(Colors.GREEN + f"Imagen: '{name}' registrada correctamente!\nRuta: {route}" + Colors.RESET)
+                print(Colors.GREEN + f"Imagen: '{name}' registrada correctamente!\nRuta1: {route[0]}\nRuta2: {route[1]}" + Colors.RESET)
             else:
                 print(Colors.RED + "No se pudo registrar la imagen" + Colors.RESET)
             sleep(1)
