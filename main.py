@@ -26,7 +26,9 @@ def menu():
         if option == 1:
             print()
             name = input("Nombre de la imagen: ").strip()
-            route = image_controller.register_image(name)
+            size = input("Tamaño de la imagen: ")
+            url = input("URL de la imagen: ")
+            route = image_controller.register_image(name, size, url)
             if route:
                 print(Colors.GREEN + f"Imagen: '{name}' registrada correctamente!\nRuta1: {route[0]}\nRuta2: {route[1]}" + Colors.RESET)
             else:
@@ -72,3 +74,4 @@ def menu():
 
 if __name__ == "__main__":
     menu()
+    #image_controller.load_dataset()

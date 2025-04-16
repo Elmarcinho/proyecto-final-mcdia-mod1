@@ -1,11 +1,12 @@
 import os
 import shutil
+import pandas as pd
 from models import ImageModel
 
 
 class ImageController:
     def __init__(self):
-        self.data_set = []
+        self.dataset = []
         self.images = []
         self.src_path = "/home/elmarcinho/Final_Project/models/dataset/images/covid_images"
         self.dst_path = "/home/elmarcinho/Final_Project/new_images/covid_images"
@@ -13,19 +14,38 @@ class ImageController:
         self.dst_path2 = "/home/elmarcinho/Final_Project/new_images/covid_masks"
     
 
-    def register_image(self, image_file):
+    def load_dataset(self):
+        df = pd.read_csv("/home/elmarcinho/Final_Project/models/dataset/COVID.metadata.csv", delimiter=";")
+        self.dataset = df.to_dict("records")
+
+
+    def search_image(self, file_name):
+        if self.dataset == []:
+            self.load_dataset()
+
+        for image in self.dataset:
+            if image["FILE NAME"] == file_name:
+                return True
+        return False
+    
+    def register_image(self, image_file, size, url):
 
         image_name, extension = os.path.splitext(image_file)
+        image_format = extension[1:].upper()
+
+        exsts_image = self.search_image(image_name.upper())
+
         image_name = image_name.upper() + extension.lower()
         route_image = os.path.join(self.src_path, image_name)
         route_image2 = os.path.join(self.src_path2, image_name)
 
-        if os.path.exists(route_image):
+        if os.path.exists(route_image) and exsts_image:
             shutil.copy(route_image, self.dst_path)
             shutil.copy(route_image2, self.dst_path2)
             id_image = len(self.images) + 1
-            new_image = ImageModel(id_image, image_name, self.dst_path, self.dst_path2)
+            new_image = ImageModel(id_image, image_name, image_format, size, url, self.dst_path, self.dst_path2)
             self.images.append(new_image)
+            print(self.images)
             return [self.dst_path, self.dst_path2]
         else:
             return
@@ -36,7 +56,7 @@ class ImageController:
             print("No hay imágenes registradas.")
             return
         for image in self.images:
-            print(f"ID: {image.id}, Nombre: {image.name},\n Ruta1: {image.path},\n Ruta2: {image.path2}")
+            print(f"ID: {image.id}, Nombre: {image.file_name}, Size: {image.size} , Url: {image.url} ,\n Ruta1: {image.path},\n Ruta2: {image.path2}")
     
     
     def modify_image(self, id_image, image_file):
