@@ -26,7 +26,7 @@ def menu():
         if option == 1:
             print()
             name = input("Nombre de la imagen: ").strip()
-            route = image_controller.add_image(name)
+            route = image_controller.register_image(name)
             if route:
                 print(Colors.GREEN + f"Imagen: '{name}' registrada correctamente!\nRuta1: {route[0]}\nRuta2: {route[1]}" + Colors.RESET)
             else:

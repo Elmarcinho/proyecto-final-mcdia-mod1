@@ -5,14 +5,15 @@ from models import ImageModel
 
 class ImageController:
     def __init__(self):
+        self.data_set = []
         self.images = []
-        self.src_path = "/home/elmarcinho/Final_Project/images/covid_images"
-        self.dst_path = "/home/elmarcinho/Final_Project/images/new_images/covid_images"
-        self.src_path2 = "/home/elmarcinho/Final_Project/images/covid_masks"
-        self.dst_path2 = "/home/elmarcinho/Final_Project/images/new_images/covid_masks"
+        self.src_path = "/home/elmarcinho/Final_Project/models/dataset/images/covid_images"
+        self.dst_path = "/home/elmarcinho/Final_Project/new_images/covid_images"
+        self.src_path2 = "/home/elmarcinho/Final_Project/models/dataset/images/covid_masks"
+        self.dst_path2 = "/home/elmarcinho/Final_Project/new_images/covid_masks"
     
 
-    def add_image(self, image_file):
+    def register_image(self, image_file):
 
         image_name, extension = os.path.splitext(image_file)
         image_name = image_name.upper() + extension.lower()
