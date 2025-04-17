@@ -1,4 +1,3 @@
-import os
 from time import sleep
 from utils import Colors, clear_screen, get_option
 from controllers import ImageController
@@ -25,12 +24,12 @@ def menu():
         
         if option == 1:
             print()
-            name = input("Nombre de la imagen: ").strip()
+            file_name = input("Nombre de la imagen: ").strip()
             size = input("Tamaño de la imagen: ")
             url = input("URL de la imagen: ")
-            route = image_controller.register_image(name, size, url)
+            route = image_controller.register_image(file_name, size, url)
             if route:
-                print(Colors.GREEN + f"Imagen: '{name}' registrada correctamente!\nRuta1: {route[0]}\nRuta2: {route[1]}" + Colors.RESET)
+                print(Colors.GREEN + f"Imagen: '{file_name}' registrada correctamente!\nRuta1: {route[0]}\nRuta2: {route[1]}" + Colors.RESET)
             else:
                 print(Colors.RED + "No se pudo registrar la imagen" + Colors.RESET)
             sleep(1)
@@ -38,10 +37,12 @@ def menu():
         elif option == 2:
             print()
             id_image = int(input("Ingrese el 'ID' de la imagen a modificar: "))
-            name = input("Nuevo nombre de la imagen: ")
+            file_name = input("Nuevo nombre de la imagen: ")
+            size = input("Nuevo tamaño de la imagen: ")
+            url = input("Nueva URL de la imagen: ")
             
-            if image_controller.modify_image(id_image, name):
-                print(Colors.GREEN + f"Imagen renombrada a '{name}' correctamente!" + Colors.RESET)
+            if image_controller.modify_image(id_image, file_name, size, url):
+                print(Colors.GREEN + f"Imagen renombrada a '{file_name}' correctamente!" + Colors.RESET)
             else:
                 print(Colors.RED + "Error: Imagen no encontrada." + Colors.RESET)
             sleep(1)
