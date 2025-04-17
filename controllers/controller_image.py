@@ -3,10 +3,8 @@ import shutil
 import pandas as pd
 from models import ImageModel
 from data import Storage
-<<<<<<< HEAD
 from pathlib import Path
-=======
->>>>>>> main
+
 
 storage = Storage()
 
@@ -20,7 +18,7 @@ class ImageController:
         self.src_path2 = base_path / "models" / "dataset" / "images" / "covid_masks"
         self.dst_path2 =  base_path / "new_images" / "covid_masks"
         self.images = storage.load_storage()
-        
+
 
     def load_dataset(self):
         base_path = Path(__file__).resolve().parent.parent  # Subes dos niveles a la carpeta del proyecto
