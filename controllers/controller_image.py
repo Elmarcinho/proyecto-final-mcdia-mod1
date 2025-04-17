@@ -2,20 +2,30 @@ import os
 import shutil
 import pandas as pd
 from models import ImageModel
+from pathlib import Path
 
 
 class ImageController:
     def __init__(self):
         self.dataset = []
         self.images = []
-        self.src_path = "/home/elmarcinho/Final_Project/models/dataset/images/covid_images"
-        self.dst_path = "/home/elmarcinho/Final_Project/new_images/covid_images"
-        self.src_path2 = "/home/elmarcinho/Final_Project/models/dataset/images/covid_masks"
-        self.dst_path2 = "/home/elmarcinho/Final_Project/new_images/covid_masks"
+        base_path = Path(__file__).resolve().parent.parent  # Subes dos niveles a la carpeta del proyecto
+       
+        self.src_path = base_path / "models" / "dataset" / "images" / "covid_images"
+        self.dst_path = base_path / "new_images" / "covid_images"
+        self.src_path2 = base_path / "models" / "dataset" / "images" / "covid_masks"
+        self.dst_path2 =  base_path / "new_images" / "covid_masks"
+        
+        #self.src_path = "/home/elmarcinho/Final_Project/models/dataset/images/covid_images"
+        #self.dst_path = "/home/elmarcinho/Final_Project/new_images/covid_images"
+        #self.src_path2 = "/home/elmarcinho/Final_Project/models/dataset/images/covid_masks"
+        #self.dst_path2 = "/home/elmarcinho/Final_Project/new_images/covid_masks"
+       
     
 
     def load_dataset(self):
-        df = pd.read_csv("/home/elmarcinho/Final_Project/models/dataset/COVID.metadata.csv", delimiter=";")
+        base_path = Path(__file__).resolve().parent.parent  # Subes dos niveles a la carpeta del proyecto
+        df = pd.read_csv(base_path / "models" / "dataset" / "COVID.metadata.csv", delimiter=";")
         self.dataset = df.to_dict("records")
 
 
