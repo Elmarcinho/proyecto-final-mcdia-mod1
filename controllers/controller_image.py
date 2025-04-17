@@ -46,6 +46,7 @@ class ImageController:
     
     
     def modify_image(self, id_image, image_file):
+        self.images = storage.load_storage()
 
         image_name, extension = os.path.splitext(image_file)
         image_name = image_name.upper() + extension.lower()
@@ -53,7 +54,7 @@ class ImageController:
         new_image_path2 = os.path.join(self.dst_path2, image_name)
 
         for image in self.images:
-            if image['id'] == id_image:
+            if image['id'] == int(id_image):
                 current_image_path = os.path.join(image['path'], image['name'])
                 current_image_path2 = os.path.join(image['path2'], image['name'])
 
@@ -72,7 +73,7 @@ class ImageController:
 
     def delete_image(self, id_image):
         for image in self.images:
-            if image['id'] == id_image:
+            if image['id'] == int(id_image):
                 current_image_path = os.path.join(image['path'], image['name'])
                 current_image_path2 = os.path.join(image['path2'], image['name'])
                 if os.path.exists(current_image_path):
