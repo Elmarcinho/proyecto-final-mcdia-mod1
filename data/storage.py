@@ -22,7 +22,10 @@ class Storage:
         storage = self.load_storage()
         storage.append({
             "id": image.id,
-            "name": image.name,
+            "file_name": image.file_name,
+            "format": image.format,
+            "size": image.size,
+            "url": image.url,
             "path": image.path,
             "path2": image.path2
         })
