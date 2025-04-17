@@ -8,12 +8,12 @@ storage = Storage()
 
 class ImageController:
     def __init__(self):
-        self.images = storage.load_storage()
-        self.src_path = "/home/elmarcinho/Final_Project/images/covid_images"
-        self.dst_path = "/home/elmarcinho/Final_Project/images/new_images/covid_images"
-        self.src_path2 = "/home/elmarcinho/Final_Project/images/covid_masks"
-        self.dst_path2 = "/home/elmarcinho/Final_Project/images/new_images/covid_masks"
         self.dataset = []
+        self.images = storage.load_storage()
+        self.src_path = "/home/elmarcinho/Final_Project/models/dataset/images/covid_images"
+        self.dst_path = "/home/elmarcinho/Final_Project/new_images/covid_images"
+        self.src_path2 = "/home/elmarcinho/Final_Project/models/dataset/images/covid_masks"
+        self.dst_path2 = "/home/elmarcinho/Final_Project/new_images/covid_masks"
     
 
     def load_dataset(self):
