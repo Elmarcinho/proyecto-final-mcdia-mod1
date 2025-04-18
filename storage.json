@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "file_name": "COVID-1.png",
+        "format": "PNG",
+        "size": "256*256",
+        "url": "https://sirm.org/category/covid-19",
+        "path": "/home/elmarcinho/Final_Project/new_images/covid_images",
+        "path2": "/home/elmarcinho/Final_Project/new_images/covid_masks"
+    },
+    {
+        "id": 1,
+        "file_name": "COVID-2.png",
+        "format": "PNG",
+        "size": "256*256",
+        "url": "https://sirm.org/category/senza-categoria/covid-19",
+        "path": "/home/elmarcinho/Final_Project/new_images/covid_images",
+        "path2": "/home/elmarcinho/Final_Project/new_images/covid_masks"
+    },
+    {
+        "id": 1,
+        "file_name": "COVID-3.png",
+        "format": "PNG",
+        "size": "256*256",
+        "url": "https://sirm.org/category/senza-categoria/covid-19",
+        "path": "/home/elmarcinho/Final_Project/new_images/covid_images",
+        "path2": "/home/elmarcinho/Final_Project/new_images/covid_masks"
+    }
+]
