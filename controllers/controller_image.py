@@ -2,7 +2,7 @@ import os
 import shutil
 import pandas as pd
 from models import ImageModel
-from data import Storage
+from services import Storage
 from pathlib import Path
 
 
@@ -13,16 +13,16 @@ class ImageController:
         self.dataset = []
         self.images = []
         base_path = Path(__file__).resolve().parent.parent  # Subes dos niveles a la carpeta del proyecto
-        self.src_path = base_path / "models" / "dataset" / "images" / "covid_images"
+        self.src_path = base_path / "services" / "dataset" / "images" / "covid_images"
         self.dst_path = base_path / "new_images" / "covid_images"
-        self.src_path2 = base_path / "models" / "dataset" / "images" / "covid_masks"
+        self.src_path2 = base_path / "services" / "dataset" / "images" / "covid_masks"
         self.dst_path2 =  base_path / "new_images" / "covid_masks"
         self.images = storage.load_storage()
 
 
     def load_dataset(self):
-        base_path = Path(__file__).resolve().parent.parent  # Subes dos niveles a la carpeta del proyecto
-        df = pd.read_csv(base_path / "models" / "dataset" / "COVID.metadata.csv", delimiter=";")
+        base_path = Path(__file__).resolve().parent.parent 
+        df = pd.read_csv(base_path / "services" / "dataset" / "COVID.metadata.csv", delimiter=";")
         self.dataset = df.to_dict("records")
 
 
@@ -36,7 +36,7 @@ class ImageController:
         return False
     
     def register_image(self, file_image, size, url):
-
+ 
         image_name, extension = os.path.splitext(file_image)
         image_format = extension[1:].upper()
 

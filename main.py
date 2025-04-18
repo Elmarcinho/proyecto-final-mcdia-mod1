@@ -75,4 +75,4 @@ def menu():
 
 if __name__ == "__main__":
     menu()
-    #image_controller.load_dataset()
+

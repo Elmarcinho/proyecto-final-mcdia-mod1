@@ -26,8 +26,8 @@ class Storage:
             "format": image.format,
             "size": image.size,
             "url": image.url,
-            "path": image.path,
-            "path2": image.path2
+            "path": str(image.path),
+            "path2": str(image.path2)
         })
 
         self.save_storage(storage)
