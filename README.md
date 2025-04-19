@@ -7,7 +7,7 @@ Este repositorio contiene un sistema desarrollado para el curso "Fundamentos de 
 El sistema permite gestionar radiografías médicas del dataset COVID-19 Radiography, implementando operaciones CRUD (Crear, Leer, Actualizar, Eliminar) a través de una interfaz de línea de comandos. Los datos se almacenan en formato JSON, siguiendo principios de programación orientada a objetos y modularización.
 
 ## Requisitos
-- Python 3.8 o superior
+- Python 3.12 o superior
 - OpenCV
 - NumPy
 
@@ -43,8 +43,8 @@ proyecto-final-mcdia-mod1/
 │   ├── image.py
 │   ├── metadata.py
 │   └── storage.py
-├── services/              # Servicios para procesamiento
-│   └── image_service.py
+├── services/              # Servicios para la persistencia y acceso a datos
+│   └── storage.py
 ├── utils/                 # Utilidades generales
 │   ├── menu.py
 │   └── options.py
@@ -69,7 +69,7 @@ El sistema presenta un menú con las siguientes opciones:
 ## Funcionalidades
 
 ### Registro de Imágenes
-Permite añadir nuevas imágenes al sistema con su metadata asociada, incluyendo ID del paciente, categoría (COVID, normal, etc.), resolución y fecha.
+Permite añadir nuevas imágenes al sistema con su metadata asociada.
 
 ### Visualización de Imágenes
 Muestra todas las imágenes registradas en el sistema junto con su información.
@@ -78,7 +78,7 @@ Muestra todas las imágenes registradas en el sistema junto con su información.
 Permite modificar la información asociada a las imágenes previamente registradas:
 - Selección de imagen a actualizar
 - Visualización de metadata actual
-- Actualización de campos específicos (ID paciente, categoría, resolución, fecha)
+- Actualización de campos (nombre de la imagen y su extensión, tamaño y url)
 - Almacenamiento de cambios en el archivo JSON
 
 ### Eliminación de Imágenes
@@ -89,7 +89,7 @@ El proyecto utiliza el dataset COVID-19 Radiography Database disponible en Kaggl
 
 ## Arquitectura
 El sistema implementa una arquitectura Modelo-Vista-Controlador (MVC):
-- **Modelo**: Representa las estructuras de datos (image.py, metadata.py, storage.py)
+- **Modelo**: Representa las estructuras de datos (model_image.py)
 - **Vista**: Interfaz de usuario en terminal (utils/menu.py)
 - **Controlador**: Maneja la lógica de negocio (controller_image.py)
 

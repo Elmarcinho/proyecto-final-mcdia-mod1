@@ -1,9 +1,11 @@
 import os
 import shutil
+from pathlib import Path
+
 import pandas as pd
+
 from models import ImageModel
 from services import Storage
-from pathlib import Path
 
 
 storage = Storage()
@@ -17,7 +19,6 @@ class ImageController:
         self.dst_path = base_path / "new_images" / "covid_images"
         self.src_path2 = base_path / "services" / "dataset" / "images" / "covid_masks"
         self.dst_path2 =  base_path / "new_images" / "covid_masks"
-        self.images = storage.load_storage()
 
 
     def load_dataset(self):
@@ -36,6 +37,8 @@ class ImageController:
         return False
     
     def register_image(self, file_image, size, url):
+
+        self.images = storage.load_storage()
  
         image_name, extension = os.path.splitext(file_image)
         image_format = extension[1:].upper()
@@ -67,7 +70,7 @@ class ImageController:
             return
         
         for image in self.images:
-            print(f"ID: {image['id']}, Nombre: {image['file_name']}, Size: {image['size']} , Url: {image['url']} ,\n Ruta1: {image['path']},\n Ruta2: {image['path2']}")
+            print(f"ID: {image['id']}, Nombre: {image['file_name']}, Size: {image['size']}, Url: {image['url']} ,\n Ruta1: {image['path']},\n Ruta2: {image['path2']}")
     
     
     def modify_image(self, id_image, file_image, size, url):
