@@ -4,7 +4,6 @@ import os
 from models import ImageModel
 
 
-# Storage represents the dictionary (persistency)
 class Storage:
     STORAGE = "storage.json"
 

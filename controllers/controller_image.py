@@ -11,12 +11,12 @@ storage = Storage()
 
 
 class ImageController:
+    # Path lo usamos para obtener la ruta del sistema de archivo actual en cualquier sistema operativo
+    # y usamos '.parent.parent' para subir dos niveles en la jerarquia de carpetas
     def __init__(self):
         self.dataset = []
         self.images = []
-        base_path = (
-            Path(__file__).resolve().parent.parent
-        )  # Subes dos niveles a la carpeta del proyecto
+        base_path = Path(__file__).resolve().parent.parent
         self.src_path = base_path / "services" / "dataset" / "images" / "covid_images"
         self.dst_path = base_path / "new_images" / "covid_images"
         self.src_path2 = base_path / "services" / "dataset" / "images" / "covid_masks"
