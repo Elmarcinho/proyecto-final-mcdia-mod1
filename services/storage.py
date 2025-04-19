@@ -13,22 +13,24 @@ class Storage:
             return []
         with open(self.STORAGE, "r") as storage:
             return json.load(storage)
-        
+
     def save_storage(self, data):
         with open(self.STORAGE, "w") as storage:
             json.dump(data, storage, indent=4)
 
     def register_image(self, image: ImageModel):
         storage = self.load_storage()
-        storage.append({
-            "id": image.id,
-            "file_name": image.file_name,
-            "format": image.format,
-            "size": image.size,
-            "url": image.url,
-            "path": str(image.path),
-            "path2": str(image.path2)
-        })
+        storage.append(
+            {
+                "id": image.id,
+                "file_name": image.file_name,
+                "format": image.format,
+                "size": image.size,
+                "url": image.url,
+                "path": str(image.path),
+                "path2": str(image.path2),
+            }
+        )
 
         self.save_storage(storage)
 

@@ -7,4 +7,3 @@ class ImageModel:
         self.url = url
         self.path = path
         self.path2 = path2
-

@@ -7,25 +7,27 @@ import pandas as pd
 from models import ImageModel
 from services import Storage
 
-
 storage = Storage()
+
 
 class ImageController:
     def __init__(self):
         self.dataset = []
         self.images = []
-        base_path = Path(__file__).resolve().parent.parent  # Subes dos niveles a la carpeta del proyecto
+        base_path = (
+            Path(__file__).resolve().parent.parent
+        )  # Subes dos niveles a la carpeta del proyecto
         self.src_path = base_path / "services" / "dataset" / "images" / "covid_images"
         self.dst_path = base_path / "new_images" / "covid_images"
         self.src_path2 = base_path / "services" / "dataset" / "images" / "covid_masks"
-        self.dst_path2 =  base_path / "new_images" / "covid_masks"
-
+        self.dst_path2 = base_path / "new_images" / "covid_masks"
 
     def load_dataset(self):
-        base_path = Path(__file__).resolve().parent.parent 
-        df = pd.read_csv(base_path / "services" / "dataset" / "COVID.metadata.csv", delimiter=";")
+        base_path = Path(__file__).resolve().parent.parent
+        df = pd.read_csv(
+            base_path / "services" / "dataset" / "COVID.metadata.csv", delimiter=";"
+        )
         self.dataset = df.to_dict("records")
-
 
     def search_image(self, file_name):
         if self.dataset == []:
@@ -35,11 +37,11 @@ class ImageController:
             if image["FILE NAME"] == file_name:
                 return True
         return False
-    
+
     def register_image(self, file_image, size, url):
 
         self.images = storage.load_storage()
- 
+
         image_name, extension = os.path.splitext(file_image)
         image_format = extension[1:].upper()
 
@@ -53,14 +55,21 @@ class ImageController:
             shutil.copy(route_image, self.dst_path)
             shutil.copy(route_image2, self.dst_path2)
             id_image = len(self.images) + 1
-            new_image = ImageModel(id_image, image_name, image_format, size, url, self.dst_path, self.dst_path2)
-            
+            new_image = ImageModel(
+                id_image,
+                image_name,
+                image_format,
+                size,
+                url,
+                self.dst_path,
+                self.dst_path2,
+            )
+
             storage.register_image(new_image)
-            
+
             return [self.dst_path, self.dst_path2]
         else:
             return
-
 
     def list_images(self):
         self.images = storage.load_storage()
@@ -68,11 +77,12 @@ class ImageController:
         if not self.images:
             print("No hay imágenes registradas.")
             return
-        
+
         for image in self.images:
-            print(f"ID: {image['id']}, Nombre: {image['file_name']}, Size: {image['size']}, Url: {image['url']} ,\n Ruta1: {image['path']},\n Ruta2: {image['path2']}")
-    
-    
+            print(
+                f"ID: {image['id']}, Nombre: {image['file_name']}, Size: {image['size']}, Url: {image['url']} ,\n Ruta1: {image['path']},\n Ruta2: {image['path2']}"
+            )
+
     def modify_image(self, id_image, file_image, size, url):
 
         image_name, extension = os.path.splitext(file_image)
@@ -83,15 +93,17 @@ class ImageController:
         self.images = storage.load_storage()
 
         for image in self.images:
-            if image['id'] == int(id_image):
-                current_image_path = os.path.join(image['path'], image['file_name'])
-                current_image_path2 = os.path.join(image['path2'], image['file_name'])
-                if os.path.exists(current_image_path) and os.path.exists(current_image_path2):
+            if image["id"] == int(id_image):
+                current_image_path = os.path.join(image["path"], image["file_name"])
+                current_image_path2 = os.path.join(image["path2"], image["file_name"])
+                if os.path.exists(current_image_path) and os.path.exists(
+                    current_image_path2
+                ):
                     os.rename(current_image_path, new_image_path)
                     os.rename(current_image_path2, new_image_path2)
-                    image['file_name'] = image_name
-                    image['size'] = size
-                    image['url'] = url
+                    image["file_name"] = image_name
+                    image["size"] = size
+                    image["url"] = url
 
                     storage.save_storage(self.images)
 
@@ -99,17 +111,16 @@ class ImageController:
                 else:
                     return False
         return False
-    
 
     def delete_image(self, id_image):
         for image in self.images:
-            if image['id'] == int(id_image):
-                current_image_path = os.path.join(image['path'], image['file_name'])
-                current_image_path2 = os.path.join(image['path2'], image['file_name'])
+            if image["id"] == int(id_image):
+                current_image_path = os.path.join(image["path"], image["file_name"])
+                current_image_path2 = os.path.join(image["path2"], image["file_name"])
                 if os.path.exists(current_image_path):
                     os.remove(current_image_path)
                     os.remove(current_image_path2)
-                    
+
                     storage.remove_image(image)
 
                     return True
